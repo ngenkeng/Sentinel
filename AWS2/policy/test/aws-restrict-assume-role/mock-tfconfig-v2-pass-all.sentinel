@@ -1,0 +1,50 @@
+import "strings"
+
+providers = {
+	"aws": {
+		"alias": "",
+		"config": {
+			"assume_role": [
+				{
+					"role_arn": {
+						"constant_value": "arn:aws:iam::741689060922:role/bkutfeassumeadmin",
+					},
+				},
+			],
+			"region": {
+				"constant_value": "us-east-1",
+			},
+		},
+		"module_address":      "",
+		"name":                "aws",
+		"provider_config_key": "aws",
+		"version_constraint":  "~> 3.52.0",
+	},
+	"template": {
+		"alias":               "",
+		"config":              {},
+		"module_address":      "",
+		"name":                "template",
+		"provider_config_key": "template",
+		"version_constraint":  "~> 2.2.0",
+	},
+}
+
+resources = {}
+
+provisioners = {}
+
+variables = {}
+
+outputs = {}
+
+module_calls = {}
+
+strip_index = func(addr) {
+	s = strings.split(addr, ".")
+	for s as i, v {
+		s[i] = strings.split(v, "[")[0]
+	}
+
+	return strings.join(s, ".")
+}

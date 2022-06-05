@@ -1,0 +1,81 @@
+import "strings"
+import "types"
+import "tfplan/v2" as tfplan
+import "tfconfig-functions" as config
+
+determine_role_arn = func(address, data) {
+  role_arn_value = "none"
+
+  if (length(data.config) else 0) > 0 and
+     (length(data.config.assume_role) else 0) > 0 and
+     data.config.assume_role[0].role_arn else null is not null {
+    role_arn_data = data.config.assume_role[0].role_arn
+    if role_arn_data.constant_value else null is not null {
+      role_arn_value = role_arn_data.constant_value
+    } else if role_arn_data.references else [] is not [] {
+      if length(role_arn_data.references) == 1 {
+        role_arn = role_arn_data.references[0]
+        if role_arn matches "var\\.(.*)" {
+          role_arn_variable = strings.trim_prefix(role_arn, "var.")
+          role_arn_value = tfplan.variables[role_arn_variable].value
+        } else {
+          print("Found a single reference in the role_arn attribute,",
+                "for provider", address, "but it was not a variable.")
+          print("This policy only handles a role_arn attribute that is",
+                "a constant value or a single reference to a variable.")
+          role_arn_value = "complex"
+        }
+      } else {
+        print("Found more than one reference in the role_arn attribute",
+              "for provider", address)
+        print("This policy only handles a role_arn attribute that is",
+              "a constant value or a single reference to a variable.")
+        role_arn_value = "complex"
+      }
+    }
+  } else {
+  }
+
+  return role_arn_value
+}
+
+get_assumed_roles = func() {
+  assumed_roles = {}
+
+  aws_providers = config.find_providers_by_type("aws")
+
+  for aws_providers as address, data {
+    assumed_roles[address] = determine_role_arn(address, data)
+  }
+
+  return assumed_roles
+}
+
+validate_assumed_roles_with_map = func(roles_map, workspace_name) {
+  validated = true
+
+  assumed_roles = get_assumed_roles()
+
+  for assumed_roles as address, role {
+    if role is not "none" {
+      if role not in keys(roles_map) {
+        print("AWS provider", address, "has assumed role",
+              role, "that is not allowed. Please make sure your provider file has the correct Terraform role corresponding to the account you are trying to deploy.")
+        validated = false
+      } else {
+        matched = false
+        for roles_map[role] as workspace_regex {
+          if workspace_name matches workspace_regex {
+            matched = true
+          }
+        }
+        if not matched {
+          print("Workspace", workspace_name, "is not allowed to assume this role.", role)
+          validated = false
+        }
+      }
+    }
+  }
+
+  return validated
+}

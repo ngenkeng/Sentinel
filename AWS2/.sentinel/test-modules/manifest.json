@@ -1,0 +1,28 @@
+{
+	"records": [
+		{
+			"key": "policy\\test\\aws-restrict-assume-role\\test-fail-all\\tfconfig-functions",
+			"source": "../../../functions/tfconfig-functions.sentinel",
+			"sourceSum": "",
+			"dest": "C:/Users/JCONCEPCION/BankUnited-Community-Sentinel-Policies-Individual-Accounts/AWS/functions/tfconfig-functions.sentinel"
+		},
+		{
+			"key": "policy\\test\\aws-restrict-assume-role\\test-pass\\aws-functions",
+			"source": "../../../functions/aws-functions.sentinel",
+			"sourceSum": "",
+			"dest": "C:/Users/JCONCEPCION/BankUnited-Community-Sentinel-Policies-Individual-Accounts/AWS/functions/aws-functions.sentinel"
+		},
+		{
+			"key": "policy\\test\\aws-restrict-assume-role\\test-pass\\tfconfig-functions",
+			"source": "../../../functions/tfconfig-functions.sentinel",
+			"sourceSum": "",
+			"dest": "C:/Users/JCONCEPCION/BankUnited-Community-Sentinel-Policies-Individual-Accounts/AWS/functions/tfconfig-functions.sentinel"
+		},
+		{
+			"key": "policy\\test\\aws-restrict-assume-role\\test-fail-all\\aws-functions",
+			"source": "../../../functions/aws-functions.sentinel",
+			"sourceSum": "",
+			"dest": "C:/Users/JCONCEPCION/BankUnited-Community-Sentinel-Policies-Individual-Accounts/AWS/functions/aws-functions.sentinel"
+		}
+	]
+}

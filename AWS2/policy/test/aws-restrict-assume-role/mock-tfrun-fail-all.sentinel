@@ -1,0 +1,31 @@
+id = "run-Dz5xYjBXiGAMFikN"
+created_at = "2021-08-17T19:30:35.755Z"
+message = "test"
+commit_sha = "5c662bf1ba91f5e7c3adc11240ef1a6135b92944"
+speculative = false
+is_destroy = false
+refresh = true
+refresh_only = false
+replace_addrs = null
+target_addrs = null
+
+variables = {}
+
+organization = {
+	"name": "BankUnited-Community",
+}
+
+workspace = {
+	"auto_apply":  false,
+	"created_at":  "2021-08-04T20:47:35.387Z",
+	"description": null,
+	"id":          "ws-B6XEeP5xMWyB1Syx",
+	"name":        "BankUnited-Community-DP-UAT",
+	"vcs_repo": {
+		"branch":             "",
+		"display_identifier": "BankUnited-TerraForm/BankUnited-Community-DataPlatform",
+		"identifier":         "BankUnited-TerraForm/BankUnited-Community-DataPlatform",
+		"ingress_submodules": false,
+	},
+	"working_directory": "DP-UAT",
+}
