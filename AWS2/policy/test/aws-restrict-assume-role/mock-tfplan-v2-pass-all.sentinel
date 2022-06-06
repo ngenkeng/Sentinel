@@ -1,0 +1,45 @@
+terraform_version = "1.0.3"
+
+planned_values = {
+	"outputs":   {},
+	"resources": {},
+}
+
+variables = {}
+
+resource_changes = {}
+
+output_changes = {}
+
+raw = {
+	"configuration": {
+		"provider_config": {
+			"aws": {
+				"expressions": {
+					"assume_role": [
+						{
+							"role_arn": {
+								"constant_value": "arn:aws:iam::741689060922:role/bkutfeassumeadmin",
+							},
+						},
+					],
+					"region": {
+						"constant_value": "us-east-1",
+					},
+				},
+				"name":               "aws",
+				"version_constraint": "~> 3.52.0",
+			},
+			"template": {
+				"name":               "template",
+				"version_constraint": "~> 2.2.0",
+			},
+		},
+		"root_module": {},
+	},
+	"format_version": "0.2",
+	"planned_values": {
+		"root_module": {},
+	},
+	"terraform_version": "1.0.3",
+}

@@ -1,0 +1,11 @@
+import "tfconfig/v2" as tfconfig
+import "strings"
+import "types"
+
+find_providers_by_type = func(type) {
+  providers = filter tfconfig.providers as address, p {
+  	p.provider_config_key matches "(.*:)?" + type + "(\\..*)?"
+  }
+
+  return providers
+}
